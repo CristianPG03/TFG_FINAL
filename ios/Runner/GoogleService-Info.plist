@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>45096370674-te5ag295aj528jn2kscmk6230giag5fj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.45096370674-te5ag295aj528jn2kscmk6230giag5fj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAu3pdUgMvXx5rrgH3GEs5_2VJmY7PrvX0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>45096370674</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.cristo.tfg</string>
+	<key>PROJECT_ID</key>
+	<string>tfg-app-turismo-galicia</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tfg-app-turismo-galicia.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:45096370674:ios:56f97dcfc6040f2a1c6b6b</string>
+</dict>
+</plist>

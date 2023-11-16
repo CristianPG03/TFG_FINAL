@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "246944912802",
+    "project_id": "tfg-app-24587",
+    "storage_bucket": "tfg-app-24587.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246944912802:android:ff3e4c8ae1ef6e03710efb",
+        "android_client_info": {
+          "package_name": "app.cristo.tfg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl2WzEgHJKYt1LsMTqHSi7ahsITi7BILs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
