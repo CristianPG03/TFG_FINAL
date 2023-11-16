@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tfg/src/constants/colors.dart';
 import 'package:tfg/src/constants/map_const.dart';
 import 'package:tfg/src/widgets/loadingAnimation/loading_animation_widget.dart';
@@ -15,10 +16,39 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  LatLng? currentPosition;
+  // LatLng? currentPosition;
   // LatLng currentPosition = const LatLng(43.36700861624196, -8.406778960226438);
+
+  final Completer<GoogleMapController> googleMapCompleterController = Completer<GoogleMapController>();
+  GoogleMapController? controllerGoogleMap;
+  
+  CameraPosition initialGoogleCameraPosition = const CameraPosition(
+    target: LatLng(37.42796133580664,-122.085749655962),
+    zoom: 15
+  );
   
   @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            GoogleMap(
+              initialCameraPosition: initialGoogleCameraPosition,
+              mapType: MapType.normal,
+              myLocationEnabled: true,
+              onMapCreated: (GoogleMapController mapController) {
+                controllerGoogleMap = mapController;
+                googleMapCompleterController.complete(controllerGoogleMap);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /*@override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
@@ -63,9 +93,9 @@ class _MapPageState extends State<MapPage> {
         ]
       )
     );
-  }
+  }*/
 
-  @override
+  /*@override
   void initState() {
     getCurrentLocation(context);
     super.initState();
@@ -97,5 +127,5 @@ class _MapPageState extends State<MapPage> {
     
     print(position.latitude);
     print(position.longitude);
-  }
+  }*/
 }
