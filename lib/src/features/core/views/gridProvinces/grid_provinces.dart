@@ -79,53 +79,6 @@ class GridProvinces extends StatelessWidget {
               );
             },
           )
-    
-          /*child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: listDestinations.length,
-            itemBuilder: (context, index) {
-              final destination = listDestinations[index];
-    
-              return ListTile(
-                title: Text(destination.name),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage(selectedDestination: destination)));
-                },
-              );
-            },
-          )*/
-          /*child: CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final destination = listDestinations[index];
-    
-                    return Card(
-                      elevation: 10.0,
-                      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: blueColor
-                        ),
-                        child: ListTile(
-                          title: Text(destination.name),
-                          subtitle: Text(destination.description),
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => MapPage(selectedDestination: destination)));
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                  childCount: listDestinations.length
-                )
-              )
-            ],
-          ),*/
         )
       ),
     );

@@ -138,7 +138,6 @@ class _AddImageGalleryState extends State<AddImageGallery> {
       Reference ref = firebaseStorage.ref().child(destination);
       await ref.putFile(img).whenComplete(() async {
         await ref.getDownloadURL().then((value) {
-          // imgRef.set({'url$i': value});
           imgRef.add({'url': value});
           
           i++;
