@@ -95,17 +95,30 @@ class _AddImageGalleryState extends State<AddImageGallery> {
   //! SEPARAR FUNCIONES A OTRO FILE
 
   //! COMPROBACION/ACCION DE SI NO ELIGE NINGUNA IMAGEN
+  // chooseImage() async {
+  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+  //   setState(() {
+  //     _image.add(File(pickedFile!.path));
+  //   });
+
+  //   if(pickedFile?.path == null) {
+  //     retrieveLostData();
+  //   }
+  // }
+
   chooseImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
+  if (pickedFile != null) {
     setState(() {
-      _image.add(File(pickedFile!.path));
+      _image.add(File(pickedFile.path));
     });
-
-    if(pickedFile?.path == null) {
-      retrieveLostData();
-    }
+  } else {
+    // El usuario no seleccionó ninguna imagen
+    print('No se seleccionó ninguna imagen.');
   }
+}
 
   Future<void> retrieveLostData() async {
     final LostDataResponse response = await picker.retrieveLostData();
