@@ -11,7 +11,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tfg/src/constants/firebase_const.dart';
 import 'package:tfg/src/features/auth/models/user_model.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as Path;
 
 //! AÑADIR TRY CATCH
 class UserController extends GetxController {
@@ -97,7 +97,7 @@ class UserController extends GetxController {
 
   //* Seleccionar imagen
   pickImage(context, source) async {
-    //! AÑADIR PEDIR PERMISOS
+    //! AÑADIR PEDIR PERMISOS Y COMPROBACION POR SI NO SE SELECCIONA NADA
     try {
       // source dependerá de la elección del usuario
       final img = await ImagePicker().pickImage(source: source, imageQuality: 80);
@@ -132,10 +132,10 @@ class UserController extends GetxController {
     // }
   }
 
-  //* Actualizar imagen
+  //* Subir imagen de perfil
   uploadImage() async {
     // Añadir path de la imagen seleccionada
-    var name = basename(imgPath.value);
+    var name = Path.basename(imgPath.value);
     // Se crea un nuevo apartado en la coleccion images,
     // en la carpeta del usuario actual y se guarda la imagen
     var destination = 'images/${currentUser!.uid}/$name';
@@ -147,29 +147,23 @@ class UserController extends GetxController {
     imgLink = imgUrl;
   }
 
-  // pickImage(context, source) async {
-  //   // Obtener permisos del usuario
-  //   await Permission.photos.request(); 
-  //   await Permission.camera.request();
-
-  //   // Obtener status del permiso
-  //   var status = await Permission.photos.status;
-
-  //   // Gestionar status
-  //   if (status.isGranted) {
-  //     try {
-  //       // source dependera de la eleccion del usuario
-  //       final img = await ImagePicker().pickImage(source: source, imageQuality: 80);
-  //       imgPath.value = img!.path;
-  //     } on PlatformException catch (e) {
-  //       VxToast.show(context, msg: "Error al seleccionar la imagen");
-  //     }
-  //   } else {
-  //     print(status);
-  //     VxToast.show(context, msg: "Permiso denegado");
-  //   }
+  //! ELIMINAR ESTA FUNCION?
+  //* Subir imagen a la galeria
+  // uploadImageToGallery() async {
+  //   // Añadir path de la imagen seleccionada
+  //   var name = Path.basename(imgPath.value);
+  //   // Se crea un nuevo apartado en la coleccion images,
+  //   // en la carpeta del usuario actual y se guarda la imagen
+  //   var destination = 'gallery/${currentUser!.uid}/$name';
+  //   Reference ref = firebaseStorage.ref().child(destination);
+  //   // Actualizando el fichero
+  //   await ref.putFile(File(imgPath.value));
+  //   // Obteniendo la url del fichero y guardarlo en la variable imgUrl
+  //   var imgUrl = await ref.getDownloadURL();
+  //   imgLink = imgUrl;
   // }
 
+  //! NECESARIA ESTA FUNCION?
   //! MIRAR OTRA MANERA DE HACER ESTA FUNCION
   //* Actualizar foto perfil
   Future<String> uploadImageToStorage(String childName, File file) async {

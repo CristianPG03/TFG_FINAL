@@ -10,6 +10,7 @@ import 'package:tfg/src/features/auth/models/user_model.dart';
 import 'package:tfg/src/features/auth/views/logIn/log_in.dart';
 import 'package:tfg/src/features/auth/views/signUp/sign_up.dart';
 import 'package:tfg/src/features/core/models/news_model.dart';
+import 'package:tfg/src/features/core/views/gallery/gallery.dart';
 import 'package:tfg/src/features/core/views/gridProvinces/grid_provinces.dart';
 import 'package:tfg/src/features/core/views/mapPage/map_page.dart';
 import 'package:tfg/src/features/core/views/newsRecommendations/news_recommendations.dart';
@@ -43,7 +44,7 @@ class _StartState extends State<Start> {
 
   var navBody = [
     const GridProvinces(),
-    const MapPage(),
+    const Gallery(),
     const NewsRecommendations(),
     const Profile(),
     //const Profile(),
@@ -93,12 +94,6 @@ class _StartState extends State<Start> {
           appBar: AppBarGeneric(
             appBarTitle: appName,
             actions: [
-              IconButton(
-                onPressed: () {
-
-                },
-                icon: const Icon(Icons.add)
-              ),
               IconButton(
                 onPressed: () {
                   //! NO CAMBIA SI EL TFNO ESTA EN MODO OSCURO

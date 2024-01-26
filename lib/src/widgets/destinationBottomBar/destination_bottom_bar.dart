@@ -1,13 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:tfg/src/constants/colors.dart';
+import 'package:tfg/src/constants/google_const.dart';
 import 'package:tfg/src/features/core/models/destinations_model.dart';
 import 'package:tfg/src/features/core/views/listDestinations/infoDestination/image_slider.dart';
+import 'package:tfg/src/features/core/views/mapPage/navigation_screen.dart';
 import 'package:tfg/src/widgets/card/destination_card_widget.dart';
 import 'package:tfg/src/widgets/card/image_slider_card.dart';
 import 'package:tfg/src/widgets/loadingAnimation/loading_animation_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DestinationBottomBar extends StatefulWidget {
   DestinationBottomBar({
@@ -66,8 +70,18 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      
+                    onPressed: () async {
+                      var lat = widget.destinationModel.latitude;
+                      var lng = widget.destinationModel.longitude;
+                      //Get.to(NavigationScreen(lat: double.parse("23"), lng: double.parse("72")));
+                      int radius = 5000;
+
+                      //! CONSEGUIR HACER PARA MOSTRAR LOS RESTAURANTES/HOTELES ETC CERCANOS A UBICACION
+
+                      // await launchUrl(Uri.parse(
+                      //   'google.navigation:q=$lat,$lng&radius=$radius&type=restaurants&key=$googleMapAndroidKey'
+                      // ));
+                      await launchUrl(Uri.parse('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$lng&radius=$radius&type=restaurant&key=$googleMapAndroidKey'));
                     },
                     child: const Text(
                       "Ver en el mapa",

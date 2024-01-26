@@ -53,7 +53,7 @@
 	<string>Camera usage</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone usage</string>
-	<key>NSLocationWhenInUseDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>The app needs location permission</string>
 	<key>io.flutter.embedded_views_preview</key>
 	<key>NSCameraUsageDescription</key>

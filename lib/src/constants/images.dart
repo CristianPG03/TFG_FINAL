@@ -1,4 +1,6 @@
 //* IMÁGENES GENERALES *//
+import 'dart:typed_data';
+
 const String imageBgSplashScreen = 'assets/images/bg_splash_screen.png';
 const String imageTourist = 'assets/images/tourist.png';
 const String imageGameOver = 'assets/images/game_over.png';
@@ -20,6 +22,9 @@ const String imageSendEmail = 'assets/images/send_email.png';
 //* News
 const String imageUserIcon = "assets/images/icon_user.png";
 const String imageUserProfile = "assets/images/user_profile.png";
+
+//* Gallery
+const String imagePlaceholder = "assets/images/placeholder.png";
 
 // *LOGOS *//
 const String logoSplashScreen = 'assets/logos/logo.png';
