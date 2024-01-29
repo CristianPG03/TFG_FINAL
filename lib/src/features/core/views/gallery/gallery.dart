@@ -405,6 +405,7 @@ class _GalleryState extends State<Gallery> {
     );
   }
 
+  //! MOVER FUNCIONES A UN CONTROLLER?
   void _mostrarPopupConfirmacion(BuildContext context, String imageId) {
     showDialog(
       context: context,
@@ -454,6 +455,7 @@ class _GalleryState extends State<Gallery> {
   }
 }
 
+//! MOVER A OTRO FILE
 class _FullScreenImage extends StatelessWidget {
   final String imageURL;
 

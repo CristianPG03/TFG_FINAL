@@ -76,12 +76,18 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
                       //Get.to(NavigationScreen(lat: double.parse("23"), lng: double.parse("72")));
                       int radius = 5000;
 
-                      //! CONSEGUIR HACER PARA MOSTRAR LOS RESTAURANTES/HOTELES ETC CERCANOS A UBICACION
+                      await launchUrl(Uri.parse(
+                        'google.navigation:q=$lat,$lng&radius=$radius&type=restaurants&key=$googleMapAndroidKey'
+                      ));
 
-                      // await launchUrl(Uri.parse(
-                      //   'google.navigation:q=$lat,$lng&radius=$radius&type=restaurants&key=$googleMapAndroidKey'
-                      // ));
-                      await launchUrl(Uri.parse('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$lng&radius=$radius&type=restaurant&key=$googleMapAndroidKey'));
+                      //! CONSEGUIR HACER PARA MOSTRAR LOS RESTAURANTES/HOTELES ETC CERCANOS
+                      //! A UBICACION ACTUAL
+                      //? AL VOLVER ATRAS CUANDO SE MUESTRA LA NAVEGACION, APARECE EL MAPA Y LA
+                      //? POSIBILIDAD DE BUSCAR RESTAURANTES/HOTELES ETC CERCANOS COMO EN EL 
+                      //? GOOGLE MAPS TRADICIONAL
+                      //! DEJARLO ASI??
+                      
+                      // await launchUrl(Uri.parse('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$lng&radius=$radius&type=restaurant&key=$googleMapAndroidKey'));
                     },
                     child: const Text(
                       "Ver en el mapa",
@@ -98,70 +104,69 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(height: 20,),
-                //! CAMBIAR CAROUSEL POR SLIDER PARA PODER CLICKAR Y AMPLIAR?
-                //! SEGUIR PROBANDO CON EL CAROUSEL?
                 CarouselSlider.builder(
                   itemCount: widget.destinationModel.image.length,
                   itemBuilder: (context, index, id) {
-                    return ImageSliderCardWidget(
-                      destinationModel: widget.destinationModel,
-                      imageIndex: index,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => _FullScreenImage(
+                              imageURL: widget.destinationModel.image[index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: ImageSliderCardWidget(
+                        destinationModel: widget.destinationModel,
+                        imageIndex: index,
+                      ),
                     );
                   },
                   options: CarouselOptions(
                     height: 200,
-                    aspectRatio: 16/9,
+                    aspectRatio: 16 / 9,
                     enableInfiniteScroll: true,
                     enlargeCenterPage: true,
                     autoPlay: true,
-                    autoPlayAnimationDuration: const Duration(seconds: 4)     
-                  )
+                    autoPlayAnimationDuration: const Duration(seconds: 4),
+                  ),
                 ),
-                // Container(
-                //   height: size.height/2,
-                //   width: size.width,
-                //   color: blueColor,
-                //   child: PhotoViewGallery.builder(
-                //     customSize: Size.fromHeight(size.height/3),
-                //     itemCount: widget.destinationModel.image.length,
-                //     builder: (context, index) {
-                //       return PhotoViewGalleryPageOptions(
-                //         imageProvider: AssetImage(widget.destinationModel.image[index]),
-                //         initialScale: PhotoViewComputedScale.contained*0.8,
-                //       );
-                //     },
-                //   ),
-                // ),
-                //! ERROR DE TAMAÑO POR QUE??
-                // Container(
-                //   height: size.height/2,
-                //   width: size.width,
-                //   child: ListView.builder(
-                //     itemCount: widget.destinationModel.image.length,
-                //     itemBuilder: (context, index) {
-                //       return Container(
-                //         color: blueColor,
-                //         // child: Text("${widget.destinationModel.description[index]}"),
-                //         height: 100,
-                //         width: size.width,
-                //         child: Image.asset(
-                //           widget.destinationModel.image[index]),
-                //       );
-                //     },
-                //   ),
-                // ),
-                // Container(
-                //   height: size.height/2,
-                //   width: size.width,
-                //   child: PhotoView(
-                //     imageProvider: AssetImage(widget.destinationModel.image[0]),
-                //   ),
-                // ),
                 const SizedBox(height: 20,),
               ],
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _FullScreenImage extends StatelessWidget {
+  final String imageURL;
+
+  const _FullScreenImage({required this.imageURL});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+      body: Center(
+        child: Hero(
+          tag: imageURL,
+          child: Image.asset(
+            imageURL,
+            fit: BoxFit.contain,
+          ),
+        ),
       ),
     );
   }
