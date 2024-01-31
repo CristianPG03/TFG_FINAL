@@ -47,6 +47,9 @@ const String sendEmailAgain = "Volver a enviar";
 const String newsText = "Noticias";
 const String recommendedDestinations = "Destinos recomendados";
 
+//* Chores
+const String choresText = "Quehaceres";
+
 //* Profile
 const String profileText = "Perfil";
 const String editProfileText = "Editar Perfil";

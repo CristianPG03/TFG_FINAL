@@ -11,6 +11,8 @@ import 'package:tfg/src/widgets/loadingAnimation/loading_animation_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
+//! NECESARIA O ELIMINAR?
+
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
 

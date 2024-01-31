@@ -11,6 +11,8 @@ import 'package:tfg/src/constants/google_const.dart';
 import 'package:tfg/src/widgets/loadingAnimation/loading_animation_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+//! NECESARIA O ELIMINAR?
+
 class NavigationScreen extends StatefulWidget {
   final double lat;
   final double lng;

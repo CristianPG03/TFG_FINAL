@@ -76,18 +76,10 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
                       //Get.to(NavigationScreen(lat: double.parse("23"), lng: double.parse("72")));
                       int radius = 5000;
 
+                      //*BOTON NAVEGACION
                       await launchUrl(Uri.parse(
-                        'google.navigation:q=$lat,$lng&radius=$radius&type=restaurants&key=$googleMapAndroidKey'
+                        'google.navigation:q=$lat,$lng&radius=$radius&key=$googleMapAndroidKey'
                       ));
-
-                      //! CONSEGUIR HACER PARA MOSTRAR LOS RESTAURANTES/HOTELES ETC CERCANOS
-                      //! A UBICACION ACTUAL
-                      //? AL VOLVER ATRAS CUANDO SE MUESTRA LA NAVEGACION, APARECE EL MAPA Y LA
-                      //? POSIBILIDAD DE BUSCAR RESTAURANTES/HOTELES ETC CERCANOS COMO EN EL 
-                      //? GOOGLE MAPS TRADICIONAL
-                      //! DEJARLO ASI??
-                      
-                      // await launchUrl(Uri.parse('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$lng&radius=$radius&type=restaurant&key=$googleMapAndroidKey'));
                     },
                     child: const Text(
                       "Ver en el mapa",
