@@ -10,5 +10,6 @@ User? currentUser = FirebaseAuth.instance.currentUser;
 
 //* COLLECTIONS
 const collectionUser = "users";
-const collectionChat = "chats";
-const collectionMsg = "messages";
+const collectionDestination = "destinations";
+const collectionFriends = "friends";
+const collectionNews = "news";

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tfg/src/constants/colors.dart';
 import 'package:tfg/src/constants/sizes.dart';
@@ -5,11 +6,10 @@ import 'package:tfg/src/features/core/models/news_model.dart';
 
 class NewsCardWidget extends StatefulWidget {
     NewsCardWidget({
-    super.key,
-    required this.newsModel
+    super.key, required this.news,
   });
 
-  NewsModel newsModel;
+  final QueryDocumentSnapshot<Object?> news;
 
   @override
   State<NewsCardWidget> createState() => _NewsCardWidgetState();
@@ -26,7 +26,7 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
         borderRadius: BorderRadius.circular(defaultSize),
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage(widget.newsModel.image),
+          image: NetworkImage(widget.news["image"]),
         ),
       ),
       child: Container(
@@ -49,7 +49,7 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.newsModel.title,
+              widget.news["title"],
               style: TextStyle(
                 color: whiteColor,
                 fontSize: defaultSize - 10,
@@ -63,11 +63,11 @@ class _NewsCardWidgetState extends State<NewsCardWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.newsModel.author,
+                  widget.news["writer"],
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 Text(
-                  widget.newsModel.date,
+                  widget.news["date"],
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ],

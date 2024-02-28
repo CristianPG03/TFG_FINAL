@@ -45,7 +45,7 @@ const String sendEmailAgain = "Volver a enviar";
 
 //* News
 const String newsText = "Noticias";
-const String recommendedDestinations = "Destinos recomendados";
+const String recommendedDestinations = "La provincia de hoy es...";
 
 //* Chores
 const String choresText = "Quehaceres";

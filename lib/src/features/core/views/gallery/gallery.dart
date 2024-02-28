@@ -348,7 +348,7 @@ class _GalleryState extends State<Gallery> {
           ),
           Expanded(
             child: _isLoading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: CircularProgressIndicator())
               : StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection(collectionUser)
@@ -440,7 +440,8 @@ class _GalleryState extends State<Gallery> {
     });
 
     try {
-      await FirebaseFirestore.instance.collection(collectionUser).doc(currentUser!.uid).collection('imageURLs').doc(imageId).delete();
+      //! AÑADIR PARA ELIMINAR TAMBIEN DE STORAGE LA IMAGEN
+      await firebaseFirestore.collection(collectionUser).doc(currentUser!.uid).collection('imageURLs').doc(imageId).delete();
       // Aquí podrías mostrar un mensaje de éxito o actualizar la interfaz de usuario de alguna manera
       print("Imagen eliminada");
     } catch (error) {

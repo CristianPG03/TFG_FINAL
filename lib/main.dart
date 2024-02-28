@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tfg/firebase_options.dart';
-import 'package:tfg/src/features/auth/views/isLogged/is_logged.dart';
 import 'package:tfg/src/features/auth/views/splashScreen/splash_screen.dart';
 import 'package:tfg/src/utils/theme/theme.dart';
 

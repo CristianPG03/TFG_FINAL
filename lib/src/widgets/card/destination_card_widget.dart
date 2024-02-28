@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tfg/src/constants/colors.dart';
 import 'package:tfg/src/constants/sizes.dart';
@@ -5,11 +6,10 @@ import 'package:tfg/src/features/core/models/destinations_model.dart';
 
 class DestinationCardWidget extends StatefulWidget {
     DestinationCardWidget({
-    super.key,
-    required this.destinationModel
+    super.key, required this.destination,
   });
 
-  DestinationModel destinationModel;
+  final QueryDocumentSnapshot<Object?> destination;
 
   @override
   State<DestinationCardWidget> createState() => _DestinationCardWidgetState();
@@ -26,7 +26,7 @@ class _DestinationCardWidgetState extends State<DestinationCardWidget> {
         borderRadius: BorderRadius.circular(defaultSize),
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage(widget.destinationModel.image.first),
+          image: NetworkImage(widget.destination["images"]["img1"]),
         ),
       ),
       child: Container(
@@ -49,25 +49,23 @@ class _DestinationCardWidgetState extends State<DestinationCardWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              widget.destinationModel.name,
+              widget.destination["place"],
               style: TextStyle(
                 color: whiteColor,
-                fontSize: defaultSize - 10,
+                fontSize: defaultSize - 3,
                 fontWeight: FontWeight.bold
               ),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
             Text(
-              widget.destinationModel.place,
-              style: Theme.of(context).textTheme.labelMedium,
+              widget.destination['province'],
+              style: TextStyle(
+                color: whiteColor,
+                fontSize: defaultSize - 10,
+                fontWeight: FontWeight.w500
+              ),
               maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              widget.destinationModel.description,
-              style: Theme.of(context).textTheme.labelMedium,
-              maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
           ],

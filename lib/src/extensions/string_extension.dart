@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 extension StringExtension on String {
   String capitalizeFirstLetter() {
     return "${this[0].toUpperCase()}${substring(1)}";
@@ -13,5 +15,14 @@ extension StringExtension on String {
 
   String removeWhitespace() {
     return replaceAll(RegExp(r'\s+'), '');
+  }
+
+  Widget toColoredText(Color color) {
+    return Text(
+      this,
+      style: TextStyle(
+        color: color
+      ),
+    );
   }
 }

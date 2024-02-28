@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tfg/src/extensions/string_extension.dart';
 import 'package:tfg/src/features/core/models/destinations_model.dart';
 import 'package:tfg/src/widgets/appBar/app_bar_generic.dart';
 import 'package:tfg/src/widgets/destinationBottomBar/destination_bottom_bar.dart';
 
 class InfoDestination extends StatelessWidget {
-  final DestinationModel destination;
+  final QueryDocumentSnapshot<Object?> destination;
   const InfoDestination({super.key, required this.destination});
 
   @override
@@ -12,15 +14,16 @@ class InfoDestination extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(destination.image.first),
+          //! AJUSTAR IMAGEN AL FONDO Y TITULO
+          image: NetworkImage(destination["images"]["img1"]),
           fit: BoxFit.cover,
-          opacity: 0.7
+          opacity: 1
         )
       ),
       child: Scaffold(
-        appBar: AppBarGeneric(appBarTitle: destination.name),
+        appBar: AppBarGeneric(appBarTitle: destination["place"]),
         backgroundColor: Colors.transparent,
-        bottomNavigationBar: DestinationBottomBar(destinationModel: destination),
+        bottomNavigationBar: DestinationBottomBar(destination: destination),
       ),
     );
   }

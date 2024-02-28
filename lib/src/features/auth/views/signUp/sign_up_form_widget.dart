@@ -6,6 +6,7 @@ import 'package:tfg/src/constants/text_strings.dart';
 import 'package:tfg/src/features/auth/controllers/sign_up_controller.dart';
 import 'package:tfg/src/features/auth/models/user_model.dart';
 import 'package:tfg/src/features/auth/views/logIn/log_in.dart';
+import 'package:tfg/src/features/auth/views/splashScreen/splash_screen.dart';
 import 'package:tfg/src/utils/validateEmail/validate_email.dart';
 import 'package:tfg/src/widgets/textFieldInput/text_field_input_widget.dart';
 
@@ -40,7 +41,7 @@ class _SignupFormState extends State<SignupForm> {
                 if (value!.isEmpty) {
                   return "Este campo no puede quedar vacío";
                 } else if (value.length < 6) {
-                  return "El nombre tiene que tener al menos 6 caracteres";
+                  return "Longitud de al menos 6 caracteres";
                 }
                 return null;
               },
@@ -65,7 +66,7 @@ class _SignupFormState extends State<SignupForm> {
                 if (value!.isEmpty) {
                   return "Este campo no puede quedar vacío";
                 } else if (value.length < 6) {
-                  return "La contraseña tiene que tener al menos 6 caracteres";
+                  return "Longitud de al menos 6 caracteres";
                 } else if (value != signUpController.confirmPassword.text) {
                   return "Las contraseñas no coinciden";
                 }
@@ -87,13 +88,12 @@ class _SignupFormState extends State<SignupForm> {
               isPass: true,
             ),
             const SizedBox(height: heightSize - 20,),
-            //! HACER LAS COMPROBACIONES DE QUE LAS DOS CONTRASEÑAS SON IGUALES
             TextFieldInputWidget(
               validator: (value) {
                 if (value!.isEmpty) {
                   return "Este campo no puede quedar vacío";
                 } else if (value.length < 6) {
-                  return "La contraseña tiene que tener al menos 6 caracteres";
+                  return "Longitud de al menos 6 caracteres";
                 }
                 return null;
               },
@@ -117,110 +117,17 @@ class _SignupFormState extends State<SignupForm> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
-                  final name = signUpController.name.text.trim();
-                  final email = signUpController.email.text.trim();
-                  final password = signUpController.password.text.trim();
+                  // final name = signUpController.name.text.trim();
+                  // final email = signUpController.email.text.trim();
+                  // final password = signUpController.password.text.trim();
 
                   if (_formKey.currentState!.validate()) {
-                    // final user = UserModel(
-                    //   //id: signUpController.userRepository.currentUser.uid,
-                    //   id: "id",
-                    //   name: name,
-                    //   email: email,
-                    //   password: password,
-                    //   biography: "Explorando...",
-                    //   profileImage: "",
-                    //   // lastActive: "",
-                    //   // pushToken: ""
-                    // );
-                    
                     signUpController.signUp(context)
-                    .then((value) => Get.offAll(() => const Login()));
+                    //! DEJAR QUE VAYA A SPLASHSCREEN PARA DARLE TIEMPO A CARGAR
+                    //! EL INFO_CARD DEL DRAWER?
+                    //! ESO FUNCIONA??? SE HA SOLUCIONADO??
+                    .then((value) => Get.offAll(() => SplashScreen()));
                   }
-
-                  /*try {
-                    //! UTILIZAR TAMBIEN LA AUTHENTICATION DE FIREBASE JUNTO A 
-                    //! FIRESTORE?
-                    /*await AuthService.firebase()
-                        .signUp(email: email, password: password)
-                        .then((value) {
-                          //createUser();
-
-                          //! DONDE COLOCAR ESTE SNACK BAR PARA QUE SOLO SALTE SI
-                          //! HA TERMINADO CORRECTAMENTE?
-                          /*showTopSnackBar(
-                            Overlay.of(context),
-                            const CustomSnackBar.success(
-                              message: "Cuenta creada correctamente"
-                            )
-                          );*/
-
-                          final user = UserModel(
-                            name: name,
-                            email: email,
-                            password: password
-                          );
-
-                          //! MANERA DE NOTIFICAR CON UN SHOWTOPSNACKBAR DE QUE SE 
-                          //! HA CREADO LA CUENTA CORRECTAMENTE?
-                          
-
-                          Get.offAllNamed(loginRoute);
-                        });*/
-
-                    final user = UserModel(
-                      name: name,
-                      email: email,
-                      password: password
-                    );
-
-                    SignUpController.instance.createUser(user);
-                  } on EmailExistsAuthException {
-                    showTopSnackBar(
-                      Overlay.of(context),
-                      const CustomSnackBar.error(
-                        message: "EL CORREO INTRODUCIDO YA PERTENECE A OTRO USUARIO"
-                      )
-                    );
-                    /*await showErrorDialog(context,
-                        'EL CORREO INTRODUCIDO YA PERTENECE A OTRO USUARIO');*/
-                  } on InvalidEmailAuthException {
-                    showTopSnackBar(
-                      Overlay.of(context),
-                      const CustomSnackBar.error(
-                        message: "EL CORREO INTRODUCIDO NO ES VÁLIDO"
-                      )
-                    );
-                    /*await showErrorDialog(context,
-                        'EL CORREO INTRODUCIDO NO ES VÁLIDO');*/
-                  } on InvalidPasswordAuthException {
-                    showTopSnackBar(
-                      Overlay.of(context),
-                      const CustomSnackBar.error(
-                        message: "LA CONTRASEÑA INTRODUCIDA NO ES VÁLIDA (MÍNIMO 6 CARACTERES)"
-                      )
-                    );
-                    /*await showErrorDialog(context,
-                        'LA CONTRASEÑA INTRODUCIDA NO ES VÁLIDA (MÍNIMO 6 CARACTERES)');*/
-                  } on EmptyFieldsException {
-                    showTopSnackBar(
-                      Overlay.of(context),
-                      const CustomSnackBar.error(
-                        message: "RELLENE TODOS LOS CAMPOS"
-                      )
-                    );
-                    /*await showErrorDialog(
-                        context, 'RELLENE TODOS LOS CAMPOS');*/
-                  } on GenericAuthException {
-                    showTopSnackBar(
-                      Overlay.of(context),
-                      const CustomSnackBar.error(
-                        message: "ERROR AL REGISTRARSE"
-                      )
-                    );
-                    /*await showErrorDialog(
-                        context, 'ERROR AL REGISTRARSE');*/
-                  }*/
                 },
                 child: Text(signupText.toUpperCase())
               ),

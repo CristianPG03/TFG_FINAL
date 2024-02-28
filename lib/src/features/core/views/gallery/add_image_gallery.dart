@@ -94,19 +94,7 @@ class _AddImageGalleryState extends State<AddImageGallery> {
 
   //! SEPARAR FUNCIONES A OTRO FILE
 
-  //! COMPROBACION/ACCION DE SI NO ELIGE NINGUNA IMAGEN
-  // chooseImage() async {
-  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-  //   setState(() {
-  //     _image.add(File(pickedFile!.path));
-  //   });
-
-  //   if(pickedFile?.path == null) {
-  //     retrieveLostData();
-  //   }
-  // }
-
+  //! COMPROBACION/ACCION DE SI NO ELIGE NINGUNA IMAGEN?
   chooseImage() async {
   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -115,7 +103,6 @@ class _AddImageGalleryState extends State<AddImageGallery> {
       _image.add(File(pickedFile.path));
     });
   } else {
-    // El usuario no seleccionó ninguna imagen
     print('No se seleccionó ninguna imagen.');
   }
 }
@@ -147,7 +134,7 @@ class _AddImageGalleryState extends State<AddImageGallery> {
       });
 
       var name = Path.basename(img.path);
-      var destination = '${currentUser!.uid}/$name';
+      var destination = 'gallery/${currentUser!.uid}/$name';
       Reference ref = firebaseStorage.ref().child(destination);
       await ref.putFile(img).whenComplete(() async {
         await ref.getDownloadURL().then((value) {

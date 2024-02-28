@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:tfg/src/constants/colors.dart';
 import 'package:tfg/src/constants/google_const.dart';
+import 'package:tfg/src/constants/sizes.dart';
 import 'package:tfg/src/features/core/models/destinations_model.dart';
 import 'package:tfg/src/features/core/views/listDestinations/infoDestination/image_slider.dart';
 import 'package:tfg/src/features/core/views/mapPage/navigation_screen.dart';
@@ -14,12 +16,9 @@ import 'package:tfg/src/widgets/loadingAnimation/loading_animation_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DestinationBottomBar extends StatefulWidget {
-  DestinationBottomBar({
-    super.key,
-    required this.destinationModel
-  });
+  DestinationBottomBar({super.key, required this.destination});
   
-  DestinationModel destinationModel;
+  final QueryDocumentSnapshot<Object?> destination;
 
   @override
   State<DestinationBottomBar> createState() => _DestinationBottomBarState();
@@ -51,11 +50,11 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.destinationModel.name,
+                  widget.destination["place"],
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
                 Text(
-                  widget.destinationModel.place,
+                  widget.destination["province"],
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const Divider(
@@ -63,7 +62,7 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
                   thickness: 2,
                 ),
                 Text(
-                  widget.destinationModel.description,
+                  widget.destination["description"],
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(height: 30,),
@@ -71,8 +70,8 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
-                      var lat = widget.destinationModel.latitude;
-                      var lng = widget.destinationModel.longitude;
+                      var lat = widget.destination["latitude"];
+                      var lng = widget.destination["longitude"];
                       //Get.to(NavigationScreen(lat: double.parse("23"), lng: double.parse("72")));
                       int radius = 5000;
 
@@ -96,8 +95,57 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(height: 20,),
+                // CarouselSlider.builder(
+                //   itemCount: widget.destination["images"].length,
+                //   itemBuilder: (context, index, id) {
+                //     return Container(
+                //       decoration: BoxDecoration(
+                //         borderRadius: BorderRadius.circular(defaultSize),
+                //         image: DecorationImage(
+                //           fit: BoxFit.fill,
+                //           image: NetworkImage(widget.destination["images"]["img${index+1}"]),
+                //         ),
+                //       ),
+                //       child: Container(
+                //         width: MediaQuery.of(context).size.width,
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(defaultSize),
+                //           border: Border.all(
+                //             color: isDarkMode ? lightColor : darkColor,
+                //             width: 2
+                //           ),
+                //         ),
+                //       ),
+                //     );
+
+                //   //   return GestureDetector(
+                //   //     onTap: () {
+                //   //       Navigator.push(
+                //   //         context,
+                //   //         MaterialPageRoute(
+                //   //           builder: (context) => _FullScreenImage(
+                //   //             imageURL: widget.destination["images"]["img${index+1}"],
+                //   //           ),
+                //   //         ),
+                //   //       );
+                //   //     },
+                //   //     child: ImageSliderCardWidget(
+                //   //       destinationModel: widget.destinationModel,
+                //   //       imageIndex: index,
+                //   //     ),
+                //   //   );
+                //   },
+                //   options: CarouselOptions(
+                //     height: 200,
+                //     aspectRatio: 16 / 9,
+                //     enableInfiniteScroll: true,
+                //     enlargeCenterPage: true,
+                //     autoPlay: true,
+                //     autoPlayAnimationDuration: const Duration(seconds: 4),
+                //   ),
+                // ),
                 CarouselSlider.builder(
-                  itemCount: widget.destinationModel.image.length,
+                  itemCount: widget.destination["images"].length,
                   itemBuilder: (context, index, id) {
                     return GestureDetector(
                       onTap: () {
@@ -105,14 +153,29 @@ class _DestinationBottomBarState extends State<DestinationBottomBar> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => _FullScreenImage(
-                              imageURL: widget.destinationModel.image[index],
+                              imageURL: widget.destination["images"]["img${index + 1}"],
                             ),
                           ),
                         );
                       },
-                      child: ImageSliderCardWidget(
-                        destinationModel: widget.destinationModel,
-                        imageIndex: index,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(defaultSize),
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(widget.destination["images"]["img${index + 1}"]),
+                          ),
+                        ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(defaultSize),
+                            border: Border.all(
+                              color: isDarkMode ? lightColor : darkColor,
+                              width: 2,
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   },
@@ -154,9 +217,8 @@ class _FullScreenImage extends StatelessWidget {
       body: Center(
         child: Hero(
           tag: imageURL,
-          child: Image.asset(
-            imageURL,
-            fit: BoxFit.contain,
+          child: PhotoView(
+            imageProvider: NetworkImage(imageURL),
           ),
         ),
       ),

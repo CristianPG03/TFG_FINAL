@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:tfg/src/constants/sizes.dart';
 import 'package:tfg/src/constants/text_strings.dart';
 import 'package:tfg/src/features/auth/views/welcome/welcome.dart';
 import 'package:tfg/src/features/core/views/profile/profile.dart';
+import 'package:tfg/src/features/core/views/settingsView/settings_view.dart';
 import 'package:tfg/src/features/core/views/start/start.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -55,6 +57,7 @@ class _DrawerListState extends State<DrawerList> {
                 Get.to(const Profile());
                 break;
               case 2: 
+                Get.to(SettingsView());
                 break;
               case 3: 
                 Alert(
@@ -207,7 +210,7 @@ class _DrawerListState extends State<DrawerList> {
                       )
                     ),
                     DialogButton(
-                      onPressed: () {
+                      onPressed: () async {
                         //* Cerrar Sesión
                         FirebaseAuth.instance.signOut()
                         .then((value) => Get.offAll(() => const Welcome()));

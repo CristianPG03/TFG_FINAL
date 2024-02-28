@@ -11,6 +11,7 @@ import 'package:tfg/src/features/auth/views/logIn/log_in.dart';
 import 'package:tfg/src/features/auth/views/signUp/sign_up.dart';
 import 'package:tfg/src/features/core/models/news_model.dart';
 import 'package:tfg/src/features/core/views/choresCurLoc/chores.dart';
+import 'package:tfg/src/features/core/views/friends/add_friend.dart';
 import 'package:tfg/src/features/core/views/gallery/gallery.dart';
 import 'package:tfg/src/features/core/views/gridProvinces/grid_provinces.dart';
 import 'package:tfg/src/features/core/views/mapPage/map_page.dart';
@@ -48,7 +49,7 @@ class _StartState extends State<Start> {
     const Gallery(),
     const NewsRecommendations(),
     const Chores(),
-    //const Profile(),
+    const AddFriend(),
   ];
 
   /*final Login _login = Login();
@@ -70,6 +71,8 @@ class _StartState extends State<Start> {
         return navBody[2];
       case 3:
         return navBody[3];
+      case 4:
+        return navBody[4];
       default:
         return Text(
           'ERROR AL MOSTRAR LA PÁGINA',
@@ -202,7 +205,7 @@ class _StartState extends State<Start> {
                 color: whiteColor,
               ),
               Icon(
-                Icons.leaderboard_rounded,
+                Icons.group,
                 size: 30,
                 color: whiteColor,
               ),

@@ -43,7 +43,7 @@ class _LoginFormState extends State<LoginForm> {
                 if (value!.isEmpty) {
                   return "Este campo no puede quedar vacío";
                 } else if (value.length < 6) {
-                  return "La contraseña tiene que tener al menos 6 caracteres";
+                  return "Longitud de al menos 6 caracteres";
                 }
                 return null;
               },
@@ -78,8 +78,7 @@ class _LoginFormState extends State<LoginForm> {
 
                   //! PARA VALIDAR LOS TEXTFIELDS CON VALIDATOR: X
                   if (_formKey.currentState!.validate()) {
-                    logInController.logIn();
-                    //.then((value) => Get.offAll(() => const Start()));
+                    logInController.logIn(context);
                   }
                 },
                 child: Text(loginText.toUpperCase())
@@ -93,7 +92,9 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void dispose() {
-    logInController.dispose();
+    //! AL REGISTRAR USUARIO, EL LOGINCONTROLLER.DISPOSE() SIEMPRE DA ERROR
+    //! CON EL COMENTADO PASA ALGO?? CORREGIRLO
+    // logInController.dispose();
     super.dispose();
   }
 }

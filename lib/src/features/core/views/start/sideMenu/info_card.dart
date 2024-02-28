@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,6 +32,9 @@ class _InfoCardState extends State<InfoCard> {
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if(snapshot.connectionState == ConnectionState.done) {
           if(snapshot.hasData) {
+            //! ERROR SIEMPRE AL ACCEDER LA PRIMERA VEZ??
+            //! ELIMINAR EL INFO CARD?????
+            //! PROBAR A HACER QUE AL REGISTRARSE TE MANDE AL SPLASHSCREAM PARA HACER TIEMPO
             var data = snapshot.data!.docs[0];
 
             return ListTile(
