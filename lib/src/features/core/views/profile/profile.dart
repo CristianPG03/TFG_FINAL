@@ -25,6 +25,8 @@ class Profile extends StatefulWidget {
 //! COMO RECARGAR PAGE PARA MOSTRAR LA INFORMACIÓN ACTUALIZADA DEL USUARIO CUANDO
 //! SE MODIFICA EN EDITAR PERFIL?
 
+//! AÑADIR CAMPO PARA MOSTRAR ID Y PODER COPIARLO??
+
 class _ProfileState extends State<Profile> {
   final userController = Get.put(UserController());
   bool _isPasswordVisible = false;

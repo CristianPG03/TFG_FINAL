@@ -46,22 +46,19 @@ class Chores extends StatelessWidget {
                       'Actividades',
                       Colors.red,
                       () async {
-                        print('Clicked on Actividades');
                         await launchUrl(Uri.parse(
                           'https://www.google.com/maps/search/activities/@$lat,$lng,$radius'
                         ));
                       }
-                    ),
+                     ),
                     const SizedBox(height: 10,),
                     _buildListItem(context, Icon(Icons.hotel), 'Hoteles', Colors.blue, () async {
-                      print('Clicked on Hoteles');
                       await launchUrl(Uri.parse(
                         'https://www.google.com/maps/search/hotels/@$lat,$lng,$radius'
                       ));
                     }),
                     const SizedBox(height: 10,),
                     _buildListItem(context, Icon(Icons.restaurant), 'Restaurantes', Colors.brown, () async {
-                      print('Clicked on Restaurantes');
                       await launchUrl(Uri.parse(
                         'https://www.google.com/maps/search/restaurants/@$lat,$lng,$radius'
                       ));

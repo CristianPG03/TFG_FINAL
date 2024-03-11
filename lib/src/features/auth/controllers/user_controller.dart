@@ -154,9 +154,9 @@ class UserController extends GetxController {
       await firebaseFirestore.collection(collectionUser).doc(currentUser!.uid).delete();
       await firebaseFirestore.collection(collectionUser).doc(currentUser!.uid).collection("imageURLs").doc().delete();
       await currentUser!.delete();
-      //! EL PROBLEMA ES QUE NO ENCUENTRA LOS DOCS, MIRAR COMO ACCEDER
-      await firebaseStorage.ref().child('gallery/${currentUser!.uid}').delete();
-      await firebaseStorage.ref().child('images/${currentUser!.uid}').delete();
+      //! EL PROBLEMA ES QUE NO ENCUENTRA LOS DOCS, MIRAR COMO ACCEDER. ARREGLARLO O DEJARLO!!!!!!!
+      // await firebaseStorage.ref().child('gallery/${currentUser!.uid}').delete();
+      // await firebaseStorage.ref().child('images/${currentUser!.uid}').delete();
     } catch(error) {
       // VxToast.show(context, msg: "Problema al eliminar el usuario. \nInténtelo otra vez más tarde");
       VxToast.show(context, msg: "${error}");

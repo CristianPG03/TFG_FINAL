@@ -6,6 +6,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tfg/src/constants/colors.dart';
 import 'package:tfg/src/constants/sizes.dart';
 import 'package:tfg/src/constants/text_strings.dart';
+import 'package:tfg/src/features/auth/views/splashScreen/splash_screen.dart';
 import 'package:tfg/src/features/auth/views/welcome/welcome.dart';
 import 'package:tfg/src/features/core/views/profile/profile.dart';
 import 'package:tfg/src/features/core/views/settingsView/settings_view.dart';
@@ -213,7 +214,9 @@ class _DrawerListState extends State<DrawerList> {
                       onPressed: () async {
                         //* Cerrar Sesión
                         FirebaseAuth.instance.signOut()
-                        .then((value) => Get.offAll(() => const Welcome()));
+                        //! ENVIAR A WELCOME O SPLASHSCREEN PARA ARREGLAR LO DEL LOGIN???
+                        .then((value) => Get.offAll(() => SplashScreen()));
+                        // .then((value) => Get.offAll(() => const Welcome()));
                       },
                       color: mainGreenColor,
                       child: Text(

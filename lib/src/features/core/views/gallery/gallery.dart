@@ -311,6 +311,9 @@ class Gallery extends StatefulWidget {
   State<Gallery> createState() => _GalleryState();
 }
 
+//! AÑADIR LO DE SOLICITAR PERMISOS PARA ACCEDER A GALERIA/CAMARA
+//! MIRAR SI YA ESTA HECHO EN ALGUNA DE LAS FUNCIONES
+
 class _GalleryState extends State<Gallery> {
   final userController = Get.put(UserController());
   bool _isLoading = false;

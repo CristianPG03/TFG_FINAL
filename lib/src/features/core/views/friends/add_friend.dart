@@ -77,6 +77,10 @@ class AddFriend extends StatefulWidget {
   State<AddFriend> createState() => _AddFriendState();
 }
 
+//! AÑADIR QUE SI NO SE INTRODUCE ID/NO EXISTE/FORMATO INCORRECTO/ETC MUESTRE MENSAJE
+//! SI SE AÑADEN MUCHOS AMIGOS, COMO FUNCIONA EL SCROLL?
+//! AL AÑADIR UN NUEVO AMIGO, APARECE EN LA LISTA O NO SE RECARGA AUTOMATICAMENTE??
+
 class _AddFriendState extends State<AddFriend> {
   final userController = Get.put(UserController());
   final TextEditingController amigoIdController = TextEditingController();

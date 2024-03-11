@@ -22,9 +22,9 @@ class _SettingsViewState extends State<SettingsView> {
       body: ListView(
         children: [
           ListTile(
-            leading: Icon(Icons.language),
+            leading: Icon(Icons.edit),
             title: Text(
-              'Idioma de la aplicación',
+              'AÑADIR OTRA OPCION???',
               style: TextStyle(
                 fontSize: 20
               ),

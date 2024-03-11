@@ -30,6 +30,8 @@ class Start extends StatefulWidget {
   State<Start> createState() => _StartState();
 }
 
+//! COMENTAR TODO EL CODIGO CORRECTAMENTE
+
 class _StartState extends State<Start> {
   final userController = Get.put(UserController());
   final listNews = NewsModel.listNews;
@@ -103,8 +105,8 @@ class _StartState extends State<Start> {
                   //! NO CAMBIA SI EL TFNO ESTA EN MODO OSCURO
                   //! SI ESTA EN MODO CLARO, FUNCIONA CORRECTAMENTE
                   Get.isDarkMode
-                      ? Get.changeTheme(AppTheme.lightTheme)
-                      : Get.changeTheme(AppTheme.darkTheme);
+                    ? Get.changeTheme(AppTheme.lightTheme)
+                    : Get.changeTheme(AppTheme.darkTheme);
                 },
                 icon: const Icon(Icons.dark_mode)
               )
