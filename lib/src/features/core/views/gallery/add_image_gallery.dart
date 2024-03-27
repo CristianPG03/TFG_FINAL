@@ -150,6 +150,7 @@ class _AddImageGalleryState extends State<AddImageGallery> {
   void initState() {
     super.initState();
 
-    imgRef = FirebaseFirestore.instance.collection(collectionUser).doc(currentUser!.uid).collection('imageURLs');
+    imgRef = FirebaseFirestore.instance.collection(collectionUser)
+            .doc(currentUser!.uid).collection('imageURLs');
   }
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tfg/src/constants/colors.dart';
 import 'package:tfg/src/constants/sizes.dart';
 import 'package:tfg/src/features/auth/controllers/user_controller.dart';
+import 'package:tfg/src/features/auth/views/splashScreen/splash_screen.dart';
 import 'package:tfg/src/features/auth/views/welcome/welcome.dart';
 import 'package:tfg/src/features/core/views/start/start.dart';
 import 'package:tfg/src/widgets/appBar/app_bar_generic.dart';
@@ -64,7 +65,7 @@ class _SettingsViewState extends State<SettingsView> {
                     TextButton(
                       onPressed: () {
                         userController.deleteUser(context).whenComplete(() {
-                          Get.offAll(const Welcome());
+                          Get.offAll(SplashScreen());
                         });
                       },
                       child: Text('Eliminar'),

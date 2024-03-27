@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tfg/src/constants/colors.dart';
 import 'package:tfg/src/constants/sizes.dart';
-import 'package:tfg/src/features/core/models/news_model.dart';
 
 class NewsCardWidget extends StatefulWidget {
     NewsCardWidget({

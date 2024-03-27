@@ -154,41 +154,9 @@ class UserController extends GetxController {
       await firebaseFirestore.collection(collectionUser).doc(currentUser!.uid).delete();
       await firebaseFirestore.collection(collectionUser).doc(currentUser!.uid).collection("imageURLs").doc().delete();
       await currentUser!.delete();
-      //! EL PROBLEMA ES QUE NO ENCUENTRA LOS DOCS, MIRAR COMO ACCEDER. ARREGLARLO O DEJARLO!!!!!!!
-      // await firebaseStorage.ref().child('gallery/${currentUser!.uid}').delete();
-      // await firebaseStorage.ref().child('images/${currentUser!.uid}').delete();
+      await auth.signOut();
     } catch(error) {
-      // VxToast.show(context, msg: "Problema al eliminar el usuario. \nInténtelo otra vez más tarde");
-      VxToast.show(context, msg: "${error}");
+      VxToast.show(context, msg: "Problema al eliminar el usuario. \nInténtelo otra vez más tarde");
     }
   }
-
-  // Future<void> deleteUser(BuildContext context) async {
-  //   try {
-  //     if (currentUser != null) {
-  //       await firebaseFirestore.collection(collectionUser).doc(currentUser!.uid).delete();
-        
-  //       try {
-  //         await currentUser!.delete();
-  //         await firebaseStorage.ref().child("gallery/${currentUser!.uid}").delete();
-  //         await firebaseStorage.ref().child("images/${currentUser!.uid}").delete();
-  //         VxToast.show(context, msg: "Usuario eliminado correctamente");
-  //       } catch (deleteUserError) {
-  //         if (deleteUserError is FirebaseAuthException) {
-  //           if (deleteUserError.code == 'requires-recent-login') {
-  //             VxToast.show(context, msg: "El usuario necesita volver a autenticarse antes de eliminar su cuenta.");
-  //           } else {
-  //             VxToast.show(context, msg: "Error al eliminar el usuario. Inténtelo otra vez más tarde.");
-  //           }
-  //         } else {
-  //           VxToast.show(context, msg: "Error al eliminar el usuario. Inténtelo otra vez más tarde.");
-  //         }
-  //       }
-  //     } else {
-  //       VxToast.show(context, msg: "No se pudo eliminar el usuario. Usuario no autenticado.");
-  //     }
-  //   } catch (error) {
-  //     VxToast.show(context, msg: "Problema al eliminar el usuario. Inténtelo otra vez más tarde.");
-  //   }
-  // }
 }

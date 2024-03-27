@@ -4,12 +4,10 @@ import 'package:get/get.dart';
 import 'package:tfg/src/constants/sizes.dart';
 import 'package:tfg/src/constants/text_strings.dart';
 import 'package:tfg/src/features/auth/controllers/sign_up_controller.dart';
-import 'package:tfg/src/features/auth/models/user_model.dart';
-import 'package:tfg/src/features/auth/views/logIn/log_in.dart';
-import 'package:tfg/src/features/auth/views/splashScreen/splash_screen.dart';
 import 'package:tfg/src/utils/validateEmail/validate_email.dart';
 import 'package:tfg/src/widgets/textFieldInput/text_field_input_widget.dart';
 
+//* Definición del widget que contiene el formulario de registro
 class SignupForm extends StatefulWidget {
   const SignupForm({
     super.key,
@@ -20,21 +18,19 @@ class SignupForm extends StatefulWidget {
 }
 
 class _SignupFormState extends State<SignupForm> {
-  final firebase = FirebaseFirestore.instance;
-  final signUpController = Get.put(SignUpController());
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool showPassword = true;
-
-  //! ERROR INESPERADO PUEDE SALTAR SI EL CORREO USADO ES EL MISMO DE UN USUARIO 
-  //! QUE YA ESTA AUTENTICADO (AUTHENTICATION) PERO SE HA BORRADO DE FIRESTORE!!!
+  final signUpController = Get.put(SignUpController()); // Controlador de la vista de registro
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // Clave global para el formulario
+  bool showPassword = true; // Variable para mostrar/ocultar la contraseña
+  bool showPassword2 = true; // Variable para mostrar/ocultar la contraseña repetida
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: _formKey, // Asigna la clave global al formulario
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: heightSize - 10),
         child: Column(
+          // Campos del formulario
           children: [
             TextFieldInputWidget(
               validator: (value) {
@@ -53,7 +49,7 @@ class _SignupFormState extends State<SignupForm> {
             ),
             const SizedBox(height: heightSize - 20,),
             TextFieldInputWidget(
-              validator: validateEmail,
+              validator: validateEmail, // Función para validar si el email es correcto
               controller: signUpController.email,
               labelText: email,
               prefixIcon: const Icon(Icons.mail),
@@ -76,16 +72,16 @@ class _SignupFormState extends State<SignupForm> {
               labelText: password,
               prefixIcon: const Icon(Icons.lock),
               suffixIcon: GestureDetector(
-                onTap: () {
+                onTap: () { // Ocultar/mostrar contraseña
                   setState(() {
                     showPassword = !showPassword;
                   });
                   FocusScope.of(context).unfocus();
                 },
-                child: Icon(showPassword == true ? Icons.visibility : Icons.visibility_off),
+                child: Icon(showPassword == true ? Icons.visibility : Icons.visibility_off), // Icono para mostrar/ocultar la contraseña
               ),
               keyboard: TextInputType.text,
-              isPass: true,
+              isPass: showPassword,
             ),
             const SizedBox(height: heightSize - 20,),
             TextFieldInputWidget(
@@ -101,32 +97,24 @@ class _SignupFormState extends State<SignupForm> {
               labelText: repeatPassword,
               prefixIcon: const Icon(Icons.lock),
               suffixIcon: GestureDetector(
-                onTap: () {
+                onTap: () { // Ocultar/mostrar contraseña
                   setState(() {
-                    showPassword = !showPassword;
+                    showPassword2 = !showPassword2;
                   });
                   FocusScope.of(context).unfocus();
                 },
-                child: Icon(showPassword == true ? Icons.visibility : Icons.visibility_off),
+                child: Icon(showPassword2 == true ? Icons.visibility : Icons.visibility_off), // Icono para mostrar/ocultar la contraseña
               ),
               keyboard: TextInputType.text,
-              isPass: true,
+              isPass: showPassword2,
             ),
             const SizedBox(height: heightSize),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
-                  // final name = signUpController.name.text.trim();
-                  // final email = signUpController.email.text.trim();
-                  // final password = signUpController.password.text.trim();
-
                   if (_formKey.currentState!.validate()) {
-                    signUpController.signUp(context)
-                    //! DEJAR QUE VAYA A SPLASHSCREEN PARA DARLE TIEMPO A CARGAR
-                    //! EL INFO_CARD DEL DRAWER?
-                    //! ESO FUNCIONA??? SE HA SOLUCIONADO??
-                    .then((value) => Get.offAll(() => SplashScreen()));
+                    signUpController.signUp(context);
                   }
                 },
                 child: Text(signupText.toUpperCase())
@@ -139,6 +127,7 @@ class _SignupFormState extends State<SignupForm> {
   }
 
   @override
+  // Liberación de los recursos del controlador al destruir el estado
   void dispose() {
     signUpController.dispose();
     super.dispose();

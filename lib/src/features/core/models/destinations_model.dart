@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tfg/src/constants/images.dart';
 
+//! NECESARIO??
+
 class DestinationModel {
   final String name;
   final String place;

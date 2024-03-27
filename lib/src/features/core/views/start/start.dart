@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -127,29 +128,14 @@ class _StartState extends State<Start> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 30, 10, 20),
+                  // child: InfoCard(),
                   child: FutureBuilder(
                     future: userController.getUserDetails(currentUser!.uid),
-                    builder: (context, snapshot) {
+                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.hasData) {
-                          // UserModel user = snapshot.data as UserModel;
-                          // var data = snapshot.data.docs[0];
-                          // userController.nameController.text = data['name'];
-                          // userController.emailController.text = data['email'];
-                          // var profileImage = user.profileImage ?? " ";
-                          //! COMO RECARGAR PAGE PARA MOSTRAR LA INFORMACIÓN ACTUALIZADA DEL USUARIO CUANDO
-                          //! SE MODIFICA EN EDITAR PERFIL?
-                          
-                          //! COMO HACER PARA QUE CARGUE MÁS RAPIDO LO QUE TRAIGO DE
-                          //! FIREBASE? Y QUE SOLO CARGUE UNA VEZ?
-
-                          
-                          //! HACER QUE SI SOBREPASA EL TAMAÑO, PONGA ... ?
-
-                          //! HACER QUE MUESTRE EL NOMBRE DEL USUARIO ACTUAL
-                          return const InfoCard(
-                            email: "Email",
-                            // profileImage: profileImage
+                          return InfoCard(
+                            name: snapshot.data!.docs[0]['name'],
                           );
                         } else if (snapshot.hasError) {
                           //! MOSTRAR OTRO MENSAJE DE ERROR, UN SNACKBAR
@@ -171,7 +157,7 @@ class _StartState extends State<Start> {
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: miniSpace,
+                    vertical: miniSpace/2,
                     horizontal: largeSpace
                   ),
                   child: Divider(thickness: 2,),

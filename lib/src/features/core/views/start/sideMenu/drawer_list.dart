@@ -27,7 +27,7 @@ class _DrawerListState extends State<DrawerList> {
       padding: const EdgeInsets.only(top: 15.0),
       child: Column(
         children: [
-          menuItem(1, "Ver Perfil", Icons.person,),
+          menuItem(1, "Ver perfil", Icons.person,),
           menuItem(2, "Ajustes", Icons.settings,),
           menuItem(3, "Contacto", Icons.contacts,),
           menuItem(4, "Enviar destino", Icons.travel_explore,),
@@ -38,7 +38,7 @@ class _DrawerListState extends State<DrawerList> {
             ),
             child: Divider(thickness: 2,),
           ),
-          menuItem(5, "Cerrar Sesión", Icons.logout,),
+          menuItem(5, "Cerrar sesión", Icons.logout,),
         ],
       ),
     );
@@ -74,6 +74,8 @@ class _DrawerListState extends State<DrawerList> {
                     ),
                     isCloseButton: false
                   ),
+                  //! CORREGIR PARA QUE AL ACCEDER AL CORREO Y SALIR SIN ENVIAR CORREO,
+                  //! DEVUELVA AL USUARIO A LA PANTALLA DE INICIO
                   title: "ENVIAR UN CORREO",
                   desc: "Póngase en contacto a través de un correo electrónico",
                   buttons: [
@@ -127,6 +129,8 @@ class _DrawerListState extends State<DrawerList> {
                 break;
               case 4:
               //! HACER UNA VISTA PARA ENVIAR POR CAMPOS LA INFO EN VEZ DE EN CORREO?
+                  //! CORREGIR PARA QUE AL ACCEDER AL CORREO Y SALIR SIN ENVIAR CORREO,
+                  //! DEVUELVA AL USUARIO A LA PANTALLA DE INICIO
               
                 Alert(
                   context: context,

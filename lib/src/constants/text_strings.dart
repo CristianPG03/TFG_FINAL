@@ -48,11 +48,11 @@ const String newsText = "Noticias";
 const String recommendedDestinations = "La provincia de hoy es...";
 
 //* Chores
-const String choresText = "Quehaceres";
+const String choresText = "Otras Actividades";
 
 //* Profile
 const String profileText = "Perfil";
-const String editProfileText = "Editar Perfil";
+const String editProfileText = "Editar perfil";
 
 //* Drawer
 const String contactEmail = "cristianpgsolveira@gmail.com";

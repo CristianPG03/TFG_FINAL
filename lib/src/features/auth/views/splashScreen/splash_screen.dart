@@ -8,6 +8,7 @@ import 'package:tfg/src/widgets/fadeInAnimation/animation_design.dart';
 import 'package:tfg/src/widgets/fadeInAnimation/fade_in_animation_controller.dart';
 import 'package:tfg/src/widgets/fadeInAnimation/fade_in_animation_model.dart';
 
+//* Definición de la pantalla de carga inicial
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
 

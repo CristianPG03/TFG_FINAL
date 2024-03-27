@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tfg/src/constants/firebase_const.dart';
 import 'package:tfg/src/constants/images.dart';
+import 'package:tfg/src/extensions/string_extension.dart';
 import 'package:tfg/src/features/auth/controllers/user_controller.dart';
 import 'package:tfg/src/widgets/loadingAnimation/loading_animation_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -11,11 +12,11 @@ import 'package:velocity_x/velocity_x.dart';
 class InfoCard extends StatefulWidget {
   const InfoCard({
     super.key,
-    required this.email,
+    this.name,
     this.profileImage
   });
   
-  final String email;
+  final String? name;
   final String? profileImage;
 
   @override
@@ -40,7 +41,7 @@ class _InfoCardState extends State<InfoCard> {
             return ListTile(
               leading: CircleAvatar(
                 backgroundColor: Colors.transparent,
-                radius: 32,
+                radius: 40,
                 child: ClipOval(
                   child: controller.imgPath.isEmpty && data['profileImage'] == ''
                     ? Image.asset(imageUserProfile)
@@ -54,7 +55,10 @@ class _InfoCardState extends State<InfoCard> {
                 ),
               ),
               title: Text(
-                controller.nameController.text,
+                widget.name.toString().capitalizeFirstLetter(),
+                // data['name'],
+                // controller.nameController.text,
+                // style: TextStyle(color: Color.fromRGBO(100, 100, 100, 1))
                 style: Theme.of(context).textTheme.displaySmall,
               ),
             );

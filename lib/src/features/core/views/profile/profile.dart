@@ -13,6 +13,7 @@ import 'package:tfg/src/features/core/views/profile/picker_dialog.dart';
 import 'package:tfg/src/utils/theme/theme.dart';
 import 'package:tfg/src/widgets/appBar/app_bar_generic.dart';
 import 'package:tfg/src/widgets/loadingAnimation/loading_animation_widget.dart';
+import 'package:tfg/src/widgets/textFieldInput/text_field_input_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Profile extends StatefulWidget {
@@ -22,14 +23,11 @@ class Profile extends StatefulWidget {
   State<Profile> createState() => _ProfileState();
 }
 
-//! COMO RECARGAR PAGE PARA MOSTRAR LA INFORMACIÓN ACTUALIZADA DEL USUARIO CUANDO
-//! SE MODIFICA EN EDITAR PERFIL?
-
 //! AÑADIR CAMPO PARA MOSTRAR ID Y PODER COPIARLO??
 
 class _ProfileState extends State<Profile> {
   final userController = Get.put(UserController());
-  bool _isPasswordVisible = false;
+  bool showPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +146,7 @@ class _ProfileState extends State<Profile> {
                             style: const TextStyle(
                               fontSize: 18
                             ),
+                            enabled: false,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               label: const Text(
@@ -199,7 +198,7 @@ class _ProfileState extends State<Profile> {
                             style: const TextStyle(
                               fontSize: 18
                             ),
-                            obscureText: !_isPasswordVisible,
+                            obscureText: !showPassword,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               label: const Text(
@@ -211,10 +210,10 @@ class _ProfileState extends State<Profile> {
                               ),
                               labelStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                               suffixIcon: IconButton(
-                                icon: Icon(_isPasswordVisible ? Icons.visibility_off : Icons.visibility),
+                                icon: Icon(showPassword ? Icons.visibility_off : Icons.visibility),
                                 onPressed: () {
                                   setState(() {
-                                    _isPasswordVisible = !_isPasswordVisible;
+                                    showPassword = !showPassword;
                                   });
                                 },
                               ),

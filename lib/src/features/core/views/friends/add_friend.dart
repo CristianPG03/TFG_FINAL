@@ -292,8 +292,9 @@ class _AddFriendState extends State<AddFriend> {
                               MaterialPageRoute(builder: (context) => ProfileView(friendDetails: friendDetails)),
                             );
                             //! QUE ELIMINE AL USUARIO DE FIREBASE Y DE LA LISTA
-                          } else if (result == 'eliminar_usuario') {
-                            print('Eliminar usuario');
+                          } else if (result == 'eliminar_amigo') {
+                            //! IMPLEMENTAR ELIMINAR AMIGO
+                            print('Eliminar amigo');
                           }
                         },
                         itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
@@ -302,8 +303,8 @@ class _AddFriendState extends State<AddFriend> {
                             child: Text('Ver perfil'),
                           ),
                           const PopupMenuItem<String>(
-                            value: 'eliminar_usuario',
-                            child: Text('Eliminar usuario'),
+                            value: 'eliminar_amigo',
+                            child: Text('Eliminar amigo'),
                           ),
                         ],
                       ),
